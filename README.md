@@ -16,6 +16,8 @@ In case you are missing the external ip to access your cluster and if you are us
 
     minikube service --url php-apache --namespace=php-ns
 
+## Launch the testing tool
 
+    kubectl run ab --namespace=php-ns --restart='Never' --image=lucj/ab -- -n 150000 -c 50 http://php-apache
 
 Author : Christian BELLET
