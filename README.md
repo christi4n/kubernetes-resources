@@ -20,4 +20,16 @@ In case you are missing the external ip to access your cluster and if you are us
 
     kubectl run ab --namespace=php-ns --restart='Never' --image=lucj/ab -- -n 150000 -c 50 http://php-apache
 
+## Basic pod - Nginx
+
+The basic pod is built thanks to an init container that puts an HTML file in the /data directory.
+
+You can use a NodePort to access the web server. Here, is it in a dedicated namespace.
+
+    export POD_NAME=$(kubectl get pods --namespace nginx-ns -l "name=nginx" -o jsonpath="{.items[0].metadata.name}")
+    
+    kubectl port-forward $POD_NAME 8282:80 -n nginx-ns
+
+    
+
 Author : Christian BELLET
